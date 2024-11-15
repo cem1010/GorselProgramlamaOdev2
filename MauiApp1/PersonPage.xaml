@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.PersonPage"
+             Title="Kişi Detayı">
+
+    <VerticalStackLayout Spacing="10" Padding="15">
+        <!-- Profil resmi  -->
+        <Frame>
+            <StackLayout>
+                <Image Source="{Binding ProfileImage}"
+                       WidthRequest="150"
+                       HeightRequest="150"/>
+
+                <Button Text="Resim Seç"
+                        Clicked="SelectImage_Clicked"/>
+            </StackLayout>
+        </Frame>
+
+        <!-- bilgi formları -->
+        <StackLayout Spacing="5">
+            <Label Text="Ad:" />
+            <Entry Text="{Binding FirstName}"
+                   Placeholder="Adı giriniz"/>
+
+            <Label Text="Soyad:"/>
+            <Entry Text="{Binding LastName}"
+                   Placeholder="Soyadı giriniz"/>
+
+            <Label Text="Telefon:"/>
+            <Entry Text="{Binding PhoneNumber}"
+                   Placeholder="Telefon giriniz"
+                   Keyboard="Telephone"/>
+
+            <Label Text="E-posta:"/>
+            <Entry Text="{Binding Email}"
+                   Placeholder="E-posta giriniz"
+                   Keyboard="Email"/>
+
+            <Label Text="Adres:"/>
+            <Editor Text="{Binding Address}"
+                    Placeholder="Adres giriniz"
+                    HeightRequest="100"/>
+        </StackLayout>
+
+        <!-- İşlem butonu -->
+        <HorizontalStackLayout Spacing="10">
+            <Button Text="Kaydet" 
+                    Clicked="Save_Clicked"/>
+            <Button Text="İptal" 
+                    Clicked="Cancel_Clicked"/>
+        </HorizontalStackLayout>
+
+    </VerticalStackLayout>
+</ContentPage>

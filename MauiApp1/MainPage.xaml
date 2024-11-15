@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.MainPage"
+             Title="Kişi Rehberi"
+             Unloaded="SavePeople">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Kaydet" Clicked="SavePeople"/>
+        <ToolbarItem Text="Ekle" IconImageSource="add.png" Clicked="Add_Click"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Arama çubuk -->
+        <SearchBar Grid.Row="0" 
+                   Placeholder="İsim veya telefon.."
+                   TextChanged="OnSearchTextChanged"/>
+
+        <!-- Kişiler -->
+        <ScrollView Grid.Row="1">
+            <CollectionView x:Name="personList">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItems>
+                                    <SwipeItem IconImageSource="delete.png"
+                                             BackgroundColor="Red"
+                                             Clicked="Delete_Click"
+                                             CommandParameter="{Binding Id}"/>
+
+                                    <SwipeItem IconImageSource="image.png"
+                                             Text="Resim"
+                                             BackgroundColor="Purple"
+                                             Clicked="AddImage_Click"
+                                             CommandParameter="{Binding Id}"/>
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem IconImageSource="edit.png"
+                                             BackgroundColor="Orange"
+                                             Clicked="Edit_Click"
+                                             CommandParameter="{Binding Id}"/>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+
+                            <Frame Margin="5" BorderColor="Gray">
+                                <Grid ColumnSpacing="10" RowSpacing="5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Frame Grid.RowSpan="3"
+                                           BorderColor="DodgerBlue"
+                                           CornerRadius="25"
+                                           HeightRequest="50"
+                                           WidthRequest="50"
+                                           Padding="0">
+                                        <Image Source="{Binding ProfileImage}"
+                                               Aspect="AspectFill"/>
+                                    </Frame>
+
+                                    <Label Grid.Column="1"
+                                           Text="{Binding FullName}"
+                                           FontAttributes="Bold"
+                                           FontSize="Medium"/>
+
+                                    <Label Grid.Column="1"
+                                           Grid.Row="1"
+                                           Text="{Binding PhoneNumber}"
+                                           TextColor="DodgerBlue"
+                                           FontSize="Small"/>
+
+                                    <Label Grid.Column="1"
+                                           Grid.Row="2"
+                                           Text="{Binding Email}"
+                                           TextColor="Gray"
+                                           FontSize="Small"/>
+                                </Grid>
+                            </Frame>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+    </Grid>
+</ContentPage>
